@@ -1,0 +1,53 @@
+# The name of your Flutter application/project.
+name: flutter_application_krushnesh
+
+# A short description of your app.
+description: "A new Flutter project."
+
+# This prevents the app from being published to pub.dev (use 'none' for private apps).
+publish_to: 'none'
+
+# The version of your app (versionCode+versionName for Android).
+version: 1.0.0+1
+
+# The Dart SDK version required to run this app.
+environment:
+  sdk: ^3.8.1
+
+# ----------------------------
+# Project dependencies
+# ----------------------------
+dependencies:
+  # Flutter SDK dependency
+  flutter:
+    sdk: flutter
+
+  # GetX package for state management, navigation, and more
+  get: ^4.7.2
+  http: ^1.4.0
+
+  # Icons used in iOS-style UI
+  cupertino_icons: ^1.0.8
+  youtube: ^2.0.0
+
+# ----------------------------
+# Development-only dependencies (for testing & linting)
+# ----------------------------
+dev_dependencies:
+  # Used for writing unit/widget tests
+  flutter_test:
+    sdk: flutter
+
+  # Provides best-practice lint rules for Flutter projects
+  flutter_lints: ^6.0.0
+
+# ----------------------------
+# Flutter-specific configuration
+# ----------------------------
+flutter:
+  # Enables use of Material Design widgets (e.g., Scaffold, AppBar, etc.)
+  uses-material-design: true
+
+  # List of folders or files to include in the app bundle (e.g., images, JSONs, etc.)
+  assets:
+    - assets/
