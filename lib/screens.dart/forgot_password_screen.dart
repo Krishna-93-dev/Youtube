@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_krushnesh/color/app_color.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({super.key});
+class ForgotPasswordScreen extends StatelessWidget {
+  ForgotPasswordScreen({super.key});
 
-  @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
-}
-
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController emailCtrl = TextEditingController();
 
-  void method() {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text("Reset link sent to ")));
+  void method(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Reset link sent to ${emailCtrl.text}")),
+    );
   }
 
   @override
@@ -76,10 +71,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: null,
+                onPressed: () => method(context), // FIXED
                 child: Text("Send Reset Link"),
                 style: ElevatedButton.styleFrom(
-                  iconColor: AppColor.primarycolor,
+                  backgroundColor: AppColor.primarycolor, // FIXED
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -89,6 +84,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           ],
         ),
       ),
-    ); // <-- this line closes the Scaffold
+    );
   }
 }

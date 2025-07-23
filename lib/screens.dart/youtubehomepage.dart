@@ -35,7 +35,7 @@ class _YoutubeState extends State<Youtube> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Notificatons(),
+                      builder: (context) => Notifications(),
                     ),
                   );
                 },
@@ -227,4 +227,6 @@ class _YoutubeState extends State<Youtube> {
       ),
     );
   }
+  
+  Notifications() {}
 }
