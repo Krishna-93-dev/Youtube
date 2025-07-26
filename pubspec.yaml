@@ -25,10 +25,14 @@ dependencies:
   # GetX package for state management, navigation, and more
   get: ^4.7.2
   http: ^1.4.0
+  shared_preferences: ^2.5.3
 
   # Icons used in iOS-style UI
   cupertino_icons: ^1.0.8
   youtube: ^2.0.0
+
+  # Video Player
+  video_player: ^2.10.0
 
 # ----------------------------
 # Development-only dependencies (for testing & linting)

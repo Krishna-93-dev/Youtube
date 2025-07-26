@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_krushnesh/screens.dart/Shorts.dart';
+import 'package:flutter_application_krushnesh/screens.dart/dummy_screen.dart';
 import 'package:flutter_application_krushnesh/screens.dart/forgot_password_screen.dart';
+import 'package:flutter_application_krushnesh/screens.dart/home_screen.dart';
 import 'package:flutter_application_krushnesh/screens.dart/library.dart';
 import 'package:flutter_application_krushnesh/screens.dart/login_screen.dart';
 import 'package:flutter_application_krushnesh/screens.dart/subscription.dart';
@@ -10,7 +12,6 @@ import 'package:flutter_application_krushnesh/screens.dart/youtubeplayvideo.dart
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -18,10 +19,12 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  get token => null;
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: '/',
+      initialRoute: token == null ? '/loginscreen' : '/tabs',
       routes: {
         '/': (context) => Tabs(),
         '/loginscreen': (context) => LoginScreen(),
@@ -30,17 +33,18 @@ class MyApp extends StatelessWidget {
         '/forgotPassword': (context) => ForgotPasswordScreen(),
         '/library_screen': (context) => Library(),
         '/Notification_screen': (context) => Notifications(),
-'/Subscription': (context) => Subscription(),
-'/creat_new_account': (context) => CreateNewAccountScreen(),
+        '/Subscription': (context) => Subscription(),
+        '/creat_new_account': (context) => CreateNewAccountScreen(),
 
         '/youtube_screen': (context) => Youtube(),
-        '/YoutubePlayVideo': (context) => Youtubeplayvideo(),
+        '/YoutubePlayVideo': (context) => YoutubePlayVideo(),
+        '/home_screen':(context) => HomeScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
   }
-  
+
   CreateNewAccountScreen() {}
-  
+
   Notifications() {}
 }

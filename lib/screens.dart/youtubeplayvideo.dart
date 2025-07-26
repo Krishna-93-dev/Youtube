@@ -1,65 +1,166 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_krushnesh/color/app_color.dart';
 
-class Youtubeplayvideo extends StatefulWidget {
-  const Youtubeplayvideo({super.key});
+
+class YoutubePlayVideo extends StatefulWidget {
+  const YoutubePlayVideo({super.key});
 
   @override
-  State<Youtubeplayvideo> createState() => _YoutubeplayvideoState();
+  State<YoutubePlayVideo> createState() => _YoutubePlayVideoState();
 }
 
-class _YoutubeplayvideoState extends State<Youtubeplayvideo> {
+class _YoutubePlayVideoState extends State<YoutubePlayVideo> {
   bool ifliked = false;
-  bool unliked = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.secondarycolor,
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Like Button
-            IconButton(
-              icon: Icon(
-                ifliked ? Icons.thumb_up : Icons.thumb_up_alt_outlined,
-                size: 40,
-                color: ifliked
-                    ? Colors.white
-                    : const Color.fromARGB(255, 227, 28, 28),
+      appBar: AppBar(
+        title: const Text("YouTube Video"),
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
+        elevation: 0,
+      ),
+      backgroundColor: Colors.black,
+      body: Column(
+        children: [
+          // Video Player Placeholder
+          AspectRatio(
+            aspectRatio: 16 / 9,
+            child: Container(
+              color: Colors.black87,
+              child: const Center(
+                child: Icon(
+                  Icons.play_circle_fill,
+                  color: Colors.white,
+                  size: 80,
+                ),
               ),
-              onPressed: () {
-                setState(() {
-                  ifliked = !ifliked;
-                  if (ifliked && unliked) {
-                    unliked = false;
-                  }
-                });
-              },
             ),
-            const SizedBox(width: 20),
-            // Dislike Button
-            IconButton(
-              icon: Icon(
-                unliked ? Icons.thumb_down : Icons.thumb_down_alt_outlined,
-                size: 40,
-                color: unliked
-                    ? Colors.white
-                    : const Color.fromARGB(255, 203, 28, 28),
+          ),
+          // Video Title & Info
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Song This Most perfect",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    const Text(
+                      "1,234,567 views • 1 day ago",
+                      style: TextStyle(color: Colors.white70, fontSize: 14),
+                    ),
+                    const Spacer(),
+                  ],
+                ),
+                Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        ifliked == true
+                            ? Icons.thumb_up
+                            : Icons.thumb_up_alt_outlined,
+                        color: ifliked == true ? Colors.white : AppColor.primarycolor,
+                      ),
+                      onPressed: () {
+                        // handle like action
+                        if (ifliked == true) {
+                          setState(() {
+                            ifliked = false;
+                          });
+                        } else {
+                          setState(() {
+                            ifliked = true;
+                          });
+                        }
+                      },
+                    ),
+                    const Text("12K", style: TextStyle(color: Colors.white)),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.thumb_down_alt_outlined,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {},
+                    ),
+                    const Text(
+                      "Dislike",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.share, color: Colors.white),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const Divider(color: Colors.white24),
+          // Channel Info
+          ListTile(
+            leading: const CircleAvatar(
+              backgroundColor: AppColor.primarycolor,
+              child: Icon(Icons.person, color: Colors.white),
+            ),
+            title: const Text(
+              "krushna_blogger",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
               ),
-              onPressed: () {
-                setState(() {
-                  unliked = !unliked;
-                  if (unliked && ifliked) {
-                    ifliked = false;
-                  }
-                });
-              },
             ),
-          ],
-        ),
+            subtitle: const Text(
+              "1M subscribers",
+              style: TextStyle(color: Colors.white70),
+            ),
+            trailing: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColor.primarycolor,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () {},
+              child: const Text("SUBSCRIBE"),
+            ),
+          ),
+          const Divider(color: Colors.white24),
+          // Comments Placeholder
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.all(12),
+              children: const [
+                Text(
+                  "Comments",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  "User1: Great video!",
+                  style: TextStyle(color: Colors.white70),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  "User2: Thanks for sharing.",
+                  style: TextStyle(color: Colors.white70),
+                ),
+                // Add more comments as needed
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
-}
+} 

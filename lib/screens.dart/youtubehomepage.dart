@@ -61,7 +61,7 @@ class _YoutubeState extends State<Youtube> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Youtubeplayvideo(),
+                    builder: (context) => const YoutubePlayVideo(),
                   ),
                 );
               },

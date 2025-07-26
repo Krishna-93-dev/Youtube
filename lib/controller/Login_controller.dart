@@ -1,58 +1,63 @@
 import 'dart:convert'; // For encoding and decoding JSON data
 import 'package:flutter/material.dart'; // Flutter UI toolkit
-import 'package:flutter_application_krushnesh/api/app_api.dart';
+import 'package:flutter_application_krushnesh/modal/login_modal.dart';
 import 'package:get/get.dart'; // GetX package for state management and navigation
 import 'package:http/http.dart' as http; // For making HTTP requests
-import 'package:flutter_application_krushnesh/api/app_api.dart';
-import 'package:flutter_application_krushnesh/modal/login_modal.dart';
- // Login model to parse the response
-import '../routes/app_routes.dart'; // App route paths
+import 'package:shared_preferences/shared_preferences.dart'; // For local storage
+import '../routes/app_routes.dart';
 
 class LoginController extends GetxController {
   var isLoading = false.obs; // Reactive variable to track loading state
 
   final emailCtrl = TextEditingController(); // Controller to manage email input
-  final passwordCtrl = TextEditingController(); // Controller to manage password input
+  final passwordCtrl = TextEditingController();
+  
+  get LoginResponse => null; // Controller to manage password input
+
 
   // Method to handle user login
   Future<void> loginUser() async {
-    // Check if email or password is empty
-    if (emailCtrl.text.trim().isEmpty || passwordCtrl.text.trim().isEmpty) {
-      Get.snackbar('Error', 'Email and Password cannot be empty'); // Show error message
-      return; // Exit the function early
-    }
-
-    isLoading.value = true; // Set loading state to true to show progress indicator
+    isLoading.value = true; // Show loading indicator
 
     try {
-      // Make a POST request to the login API
       final response = await http.post(
-        Uri.parse(BaseUrl.loginurl), // Convert URL string to URI
+        Uri.parse("https://krushimahostav.yuvapsvs.com/api/auth/login"),
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: jsonEncode({
-          "email": emailCtrl.text.trim(), // Send email as JSON
-          "password": passwordCtrl.text.trim(), // Send password as JSON
+          "email": emailCtrl.text.trim(),
+          "password": passwordCtrl.text.trim(),
         }),
       );
 
-      // If login is successful (status code 200)
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body); // Decode JSON response
-        final loginData = LoginResponse.fromJson(data); // Convert to LoginResponse model
+        final data = jsonDecode(response.body);
+        final loginData = LoginResponse.fromJson(data);
 
-        // You can store token or user info here using SharedPreferences or GetStorage if needed
+        // Save token using SharedPreferences
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', loginData.token ?? "");
 
-        Get.snackbar("Success", "Login successful", backgroundColor: Colors.green); // Show success message
-        Get.offNamed(AppRoutes.tabs); // Navigate to home screen (tabs page)
+        Get.snackbar(
+          "Success",
+          "Login successful",
+          backgroundColor: Colors.green,
+        );
+
+        Get.offNamed(AppRoutes.tabs); // Navigate to home screen
       } else {
-        // If login failed, show error message
-        final error = jsonDecode(response.body); // Decode error response
-        Get.snackbar("Login Failed", error['message'] ?? 'Unknown error'); // Show failure message
+        final error = jsonDecode(response.body);
+        Get.snackbar(
+          "Login Failed",
+          error['message'] ?? 'Unknown error',
+          backgroundColor: Colors.red,
+        );
       }
     } catch (e) {
-      // Catch any other exceptions (e.g., network issues)
-      Get.snackbar("Error", e.toString()); // Show exception message
+      Get.snackbar("Error", e.toString());
     } finally {
-      isLoading.value = false; // Stop loading indicator
+      isLoading.value = false;
     }
   }
 }

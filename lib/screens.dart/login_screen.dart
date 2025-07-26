@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_application_krushnesh/color/app_color.dart';
-import 'package:flutter_application_krushnesh/screens.dart/create_new_account.dart';
-import 'package:flutter_application_krushnesh/screens.dart/tab.dart';
+import 'package:flutter_application_krushnesh/controller/Login_controller.dart';
+import 'package:flutter_application_krushnesh/routes/app_routes.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:http/http.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,12 +16,12 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool magic = true;
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController emailCtrl = TextEditingController();
-  final TextEditingController passwordCtrl = TextEditingController();
+
+  final loginController = Get.put(LoginController());
 
   void _login() {
     if (_formKey.currentState!.validate()) {
-      Get.off(() => Tabs()); // GetX replacement for Navigator.pushReplacement
+      loginController.loginUser();
     }
   }
 
@@ -36,32 +38,34 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.network(
-                    "https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png",
-                    height: 100,
-                    width: 100,
-                  ),
+                  // YouTube Logo
+                  Image.asset('assets/images/youtube.png', height: 80),
                   const SizedBox(height: 32),
                   const Text(
                     "Sign in",
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      color: AppColor.secondarycolor,
+                      color: Colors.black87,
                     ),
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    "To continue To YouTube",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppColor.secondarycolor,
-                    ),
+                    "to continue to YouTube",
+                    style: TextStyle(fontSize: 16, color: Colors.black54),
                   ),
                   const SizedBox(height: 32),
+                  // Email Field
                   TextFormField(
-                    style: const TextStyle(color: Colors.blue, fontSize: 16),
-                    controller: emailCtrl,
+                    style: const TextStyle(
+                      color:
+                          Colors.blue,
+                      fontSize: 16,
+                    ),
+
+
+
+                    controller:loginController.emailCtrl,
                     decoration: InputDecoration(
                       labelText: "Email or phone",
                       border: OutlineInputBorder(
@@ -73,13 +77,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (value == null || value.trim().isEmpty) {
                         return "Email can not be null";
                       }
+                      if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                        return "Enter a valid email";
+                      }
                       return null;
                     },
                   ),
                   const SizedBox(height: 20),
+                  // Password Field
                   TextFormField(
-                    controller: passwordCtrl,
+                       controller: loginController.passwordCtrl,
                     obscureText: magic,
+
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         onPressed: () {
@@ -89,9 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         icon: Icon(
                           magic ? Icons.visibility_off : Icons.remove_red_eye,
-                          color: magic
-                              ? const Color.fromARGB(255, 43, 150, 238)
-                              : AppColor.primarycolor,
+                          color: magic ? Colors.blue : AppColor.primarycolor,
                         ),
                       ),
                       labelText: "Password",
@@ -111,16 +118,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   const SizedBox(height: 12),
+
                   Align(
-                    alignment: Alignment.centerRight,
+                    alignment: Alignment.bottomRight,
                     child: TextButton(
                       onPressed: () {},
-                      child: const Text(
-                        "Forgot password?",
-                        style: TextStyle(color: Colors.blue),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            (context),
+                            AppRoutes.forgotpassword,
+                          );
+
+                          Get.toNamed(AppRoutes.forgotpassword);
+                        },
+                        child: const Text(
+                          "Forgot password?",
+                          style: TextStyle(color: Colors.blue),
+                        ),
                       ),
                     ),
                   ),
+
                   const SizedBox(height: 24),
                   SizedBox(
                     width: double.infinity,
@@ -144,19 +163,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text("Don't have an account?"),
-                      const SizedBox(width: 8),
-                      ElevatedButton(
-                        onPressed: () {
-                          Get.to(() => const CreateNewAccount());
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          side: const BorderSide(color: Colors.blue),
-                        ),
-                        child: const Text(
-                          "Create account",
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 43, 128, 246),
+                      TextButton(
+                        onPressed: () {},
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              AppRoutes.creatNewAccountScreen,
+                              // MaterialPageRoute(
+                              //   builder: (context) => CreateNewAccountScreen(),
+                              // ),
+                            );
+                          },
+                          child: const Text(
+                            "Create account",
+                            style: TextStyle(color: Colors.blue),
                           ),
                         ),
                       ),
