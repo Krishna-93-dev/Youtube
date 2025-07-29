@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_krushnesh/modal/news_modal.dart';
 import 'package:flutter_application_krushnesh/screens.dart/Shorts.dart';
 import 'package:flutter_application_krushnesh/screens.dart/dummy_screen.dart';
 import 'package:flutter_application_krushnesh/screens.dart/forgot_password_screen.dart';
@@ -24,9 +25,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: token == null ? '/loginscreen' : '/tabs',
+      initialRoute: token == null ? '/newsscreen' : '/tabs', //loginscreen  
       routes: {
-        '/': (context) => Tabs(),
+        '/': (context) =>NewsScreen(),
         '/loginscreen': (context) => LoginScreen(),
         '/shorts': (context) => Shorts(),
         '/tabs': (context) => Tabs(),
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         '/Notification_screen': (context) => Notifications(),
         '/Subscription': (context) => Subscription(),
         '/creat_new_account': (context) => CreateNewAccountScreen(),
-
+'/newsscreen': (context) => NewsScreen(),
         '/youtube_screen': (context) => Youtube(),
         '/YoutubePlayVideo': (context) => YoutubePlayVideo(),
         '/home_screen':(context) => HomeScreen(),
