@@ -25,9 +25,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: token == null ? '/newsscreen' : '/tabs', //loginscreen  
+      initialRoute: token == null ? '/dummyscreen' : '/tabs', //loginscreen  //newsscreen 
       routes: {
-        '/': (context) =>NewsScreen(),
+        '/': (context) =>DummyScreen(),
         '/loginscreen': (context) => LoginScreen(),
         '/shorts': (context) => Shorts(),
         '/tabs': (context) => Tabs(),

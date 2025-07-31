@@ -2,7 +2,7 @@
 name: flutter_application_krushnesh
 
 # A short description of your app.
-description: "A new Flutter project."
+description: A new Flutter project.
 
 # This prevents the app from being published to pub.dev (use 'none' for private apps).
 publish_to: 'none'
@@ -12,46 +12,59 @@ version: 1.0.0+1
 
 # The Dart SDK version required to run this app.
 environment:
-  sdk: ^3.8.1
+  sdk: ">=3.8.0 <4.0.0"
 
 # ----------------------------
 # Project dependencies
 # ----------------------------
 dependencies:
-  # Flutter SDK dependency
   flutter:
     sdk: flutter
 
-  # GetX package for state management, navigation, and more
+  # State management and routing
   get: ^4.7.2
+
+  # HTTP package for API calls
   http: ^1.4.0
-  shared_preferences: ^2.5.3
 
-  # Icons used in iOS-style UI
+  # Local storage
+  shared_preferences: ^2.2.2
+
+  # iOS-style icons
   cupertino_icons: ^1.0.8
-  youtube: ^2.0.0
 
-  # Video Player
+  # YouTube plugin (ensure it's maintained and works well)
+  youtube: ^2.0.0
+ 
+  # For video playback
   video_player: ^2.10.0
 
 # ----------------------------
-# Development-only dependencies (for testing & linting)
+# Development-only dependencies
 # ----------------------------
 dev_dependencies:
-  # Used for writing unit/widget tests
   flutter_test:
     sdk: flutter
 
-  # Provides best-practice lint rules for Flutter projects
-  flutter_lints: ^6.0.0
+  # Linting best practices
+  flutter_lints: ^3.0.1
+
+  # Launcher icon generator
+  flutter_launcher_icons: ^0.14.4
+
+# Configuration for flutter_launcher_icons
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/Youtube_logo.png"
+  min_sdk_android: 21
 
 # ----------------------------
 # Flutter-specific configuration
 # ----------------------------
 flutter:
-  # Enables use of Material Design widgets (e.g., Scaffold, AppBar, etc.)
   uses-material-design: true
 
-  # List of folders or files to include in the app bundle (e.g., images, JSONs, etc.)
   assets:
     - assets/
+    - assets/icon/Youtube_logo.png

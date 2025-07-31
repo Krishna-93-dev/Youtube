@@ -1,36 +1,115 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
-class DummyScreen extends StatefulWidget {
-  const DummyScreen({super.key});
-
-  @override
-  State<DummyScreen> createState() => _DummyScreenState();
+void main() {
+  runApp(MyApp());
 }
 
-class _DummyScreenState extends State<DummyScreen> {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final screenheight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
+    return MaterialApp(
+      home: DummyScreen(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
 
+class DummyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Dummy Screen"), 
+      appBar: AppBar(
+        title: Text('dummy screen'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+      ),
       
-      backgroundColor: Colors.blue),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            height: screenheight * 0.7,
-            width: screenWidth * 0.6,
-            color: Colors.blue,
-            child: Text(
-              "dummy sccreen of this portion  ",
-              style: TextStyle(fontSize: screenWidth * 0.09),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            // Flexible Widget
+            Flexible(
+              flex: 1,
+              child: Container(
+                width: double.infinity,
+                color: const Color.fromARGB(255, 247, 150, 4),
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.all(8),
+                child: Text(
+                  'jay Hind ',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
             ),
-          )
-        ],
+        
+        
+        
+        
+        Flexible(
+              flex: 1,
+              child: Container(
+                width: double.infinity,
+                color: const Color.fromARGB(255, 234, 230, 226),
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.all(8),
+                child: Text(
+                  'jay bharat ',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ),
+        
+        
+        
+            
+        Flexible(
+              flex: 1,
+              child: Container(
+                width: double.infinity,
+                color: const Color.fromARGB(255, 23, 207, 41),
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.all(8),
+                child: Text(
+                  'vande mataram',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ),
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         
+            // Expanded(
+            //   flex: 3,
+            //   child: Container(
+            //     width: double.infinity,
+            //     color: const Color.fromARGB(255, 245, 245, 247),
+            //     alignment: Alignment.topLeft,
+            //     padding: EdgeInsets.all(8),
+            //     child: Text(
+            //       'middle of flag',
+            //       style: TextStyle(color: Colors.black),
+            //     ),
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }
